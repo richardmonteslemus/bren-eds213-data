@@ -1,4 +1,4 @@
---- EDS 213 Week 4 Hmwrk 1 
+--- EDS 213 Week 5 Hmwrk 1 
 
 -- Part 1
 
@@ -74,3 +74,21 @@ CREATE VIEW Long_Vol AS
 SELECT regr_slope(Volume, Longitude) AS Slope, 
        corr(Volume, Longitude) AS PCC
     FROM Long_Vol;
+
+
+-- PART 2
+-- 1) No, it does not guarantee that the Nest_ID column from Nests_big matches
+-- the Nest_ID column from Eggs_big. This is because the tables were simply 
+-- loaded in from csv files, I didnt add constaints like a foreign key for one 
+-- of them, which would have guaranteed they exist in both. 
+
+-- 2) I used the following queries 
+-- Check max and min Longitude
+SELECT MIN(S.Longitude), MAX(S.Longitude), MIN(SV.Volume)
+    FROM Site_volume AS SV
+        JOIN Site AS S ON SV.Site = S.Code;
+
+-- 3) Since the Pearson correlation coefficient is - 0.1, I would say there is a very 
+-- weak negative correlation between egg volume and longitude for Calidris alpina. Since 
+-- it is close to zero we cannot reject the possibility that there is no correlation between 
+-- egg volume and longitude, the correlation is not significant. 

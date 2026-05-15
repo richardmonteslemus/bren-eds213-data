@@ -1,0 +1,3 @@
+subquery, 0.03
+outer_join, 0.029
+except, 0.031
