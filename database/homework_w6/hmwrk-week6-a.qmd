@@ -1,0 +1,81 @@
+---
+title: "EDS 213 Homework Week 6"
+format: html
+---
+---
+title: "EDS 213 Homework Week 6a"
+author: "Richard Montes Lemus"
+format: html
+---
+
+## Correct answer 
+-- Who's the Culprit?
+SELECT P.Name, COUNT(*) AS Num_floated_nests
+FROM Bird_nests AS BN
+    JOIN Personnel AS P ON BN.Observer = P.Abbreviation
+WHERE BN.Site = 'nome'
+    AND BN.Year BETWEEN 1998 AND 2008
+    AND BN.ageMethod = 'float'
+GROUP BY P.Name
+HAVING COUNT(*) = 36;
+
+## Claude Evaluation 
+
+SELECT p.Name, COUNT(*) AS Num_floated_nests
+FROM Bird_nests bn
+JOIN Personnel p ON bn.Observer = p.Abbreviation
+WHERE bn.Site = 'nome'
+  AND bn.Year BETWEEN 1998 AND 2008
+  AND bn.ageMethod = 'float'
+GROUP BY p.Name
+HAVING COUNT(*) = 36;
+
+Is the SQL correct against the given schema? In other words, will it return the expected answer?
+
+Yes it seems that it is returning the expected query. 
+
+Does the SQL represent good understanding of the database?
+
+I think it does understand it. it used count(*) rather than the column name. 
+
+## ChatGPT Evaluation 
+SELECT 
+    p.Name, 
+    COUNT(n.Nest_ID) AS Num_floated_nests
+FROM Bird_nests bn
+JOIN Personnel p ON n.Observer = p.Abbreviation
+WHERE n.Site = 'nome'
+  AND n.Year BETWEEN 1998 AND 2008
+  AND n.ageMethod = 'float'
+GROUP BY p.Name
+HAVING COUNT(n.Nest_ID) = 36;
+
+Is the SQL correct against the given schema? In other words, will it return the expected answer?
+
+No it seems that it is not returning the expected query. 
+
+Does the SQL represent good understanding of the database?
+
+No it does not understand it. it used count(column_name) rather than the count(*)
+## Gemini Evaluation 
+SELECT 
+    p.Name, 
+    COUNT(n.Nest_ID) AS Num_floated_nests
+FROM Bird_nests n
+JOIN Personnel p ON n.Observer = p.Abbreviation
+WHERE n.Site = 'nome'
+  AND n.Year BETWEEN 1998 AND 2008
+  AND n.ageMethod = 'float'
+GROUP BY p.Name
+HAVING COUNT(n.Nest_ID) = 36;
+
+Is the SQL correct against the given schema? In other words, will it return the expected answer?
+
+No it seems that it is not returning the expected query. 
+
+Does the SQL represent good understanding of the database?
+
+No it does not understand it. it used count(column_name) rather than the count(*)
+
+
+
